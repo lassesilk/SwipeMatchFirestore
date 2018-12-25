@@ -8,20 +8,40 @@
 
 /* Begin PBXBuildFile section */
 		C4158B0921CF7A46002359DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4158B0821CF7A46002359DF /* AppDelegate.swift */; };
-		C4158B0B21CF7A46002359DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4158B0A21CF7A46002359DF /* ViewController.swift */; };
 		C4158B0E21CF7A46002359DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4158B0C21CF7A46002359DF /* Main.storyboard */; };
 		C4158B1021CF7A48002359DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4158B0F21CF7A48002359DF /* Assets.xcassets */; };
 		C4158B1321CF7A48002359DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4158B1121CF7A48002359DF /* LaunchScreen.storyboard */; };
+		C4158B1C21CF7D38002359DF /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4158B1B21CF7D38002359DF /* Extensions+UIView.swift */; };
+		C4158B1F21CF8BC2002359DF /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4158B1E21CF8BC2002359DF /* HomeBottomControlsStackView.swift */; };
+		C4158B2121CF90ED002359DF /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4158B2021CF90ED002359DF /* TopNavigationStackView.swift */; };
+		C4158B2321CF9E1F002359DF /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4158B2221CF9E1F002359DF /* CardView.swift */; };
+		C4158B2521CFFB7F002359DF /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4158B2421CFFB7F002359DF /* HomeController.swift */; };
+		C4158B2821CFFC72002359DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4158B2721CFFC72002359DF /* User.swift */; };
+		C4158B2C21D02252002359DF /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4158B2B21D02252002359DF /* CardViewModel.swift */; };
+		C4158B2E21D02AF6002359DF /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4158B2D21D02AF6002359DF /* Advertiser.swift */; };
+		C4635DA221D2C9D100A6682C /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4635DA121D2C9D100A6682C /* RegistrationController.swift */; };
+		C4635DA421D2CE4A00A6682C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4635DA321D2CE4A00A6682C /* CustomTextField.swift */; };
+		C4635DA621D2E38300A6682C /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4635DA521D2E38300A6682C /* RegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C4158B0521CF7A46002359DF /* SwipeMatchFirestore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeMatchFirestore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4158B0821CF7A46002359DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C4158B0A21CF7A46002359DF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C4158B0D21CF7A46002359DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4158B0F21CF7A48002359DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4158B1221CF7A48002359DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4158B1421CF7A48002359DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4158B1B21CF7D38002359DF /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
+		C4158B1E21CF8BC2002359DF /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
+		C4158B2021CF90ED002359DF /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
+		C4158B2221CF9E1F002359DF /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		C4158B2421CFFB7F002359DF /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		C4158B2721CFFC72002359DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C4158B2B21D02252002359DF /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		C4158B2D21D02AF6002359DF /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		C4635DA121D2C9D100A6682C /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		C4635DA321D2CE4A00A6682C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		C4635DA521D2E38300A6682C /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +74,64 @@
 		C4158B0721CF7A46002359DF /* SwipeMatchFirestore */ = {
 			isa = PBXGroup;
 			children = (
+				C4158B2A21D02241002359DF /* ViewModels */,
+				C4158B2621CFFC66002359DF /* Model */,
+				C4158B1D21CF8B9B002359DF /* Views */,
+				C4158B2921D021AB002359DF /* Controllers */,
+				C4158B1A21CF7D0B002359DF /* Extensions */,
 				C4158B0821CF7A46002359DF /* AppDelegate.swift */,
-				C4158B0A21CF7A46002359DF /* ViewController.swift */,
 				C4158B0C21CF7A46002359DF /* Main.storyboard */,
 				C4158B0F21CF7A48002359DF /* Assets.xcassets */,
 				C4158B1121CF7A48002359DF /* LaunchScreen.storyboard */,
 				C4158B1421CF7A48002359DF /* Info.plist */,
 			);
 			path = SwipeMatchFirestore;
+			sourceTree = "<group>";
+		};
+		C4158B1A21CF7D0B002359DF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C4158B1B21CF7D38002359DF /* Extensions+UIView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C4158B1D21CF8B9B002359DF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C4158B1E21CF8BC2002359DF /* HomeBottomControlsStackView.swift */,
+				C4158B2021CF90ED002359DF /* TopNavigationStackView.swift */,
+				C4158B2221CF9E1F002359DF /* CardView.swift */,
+				C4635DA321D2CE4A00A6682C /* CustomTextField.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C4158B2621CFFC66002359DF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C4158B2721CFFC72002359DF /* User.swift */,
+				C4158B2D21D02AF6002359DF /* Advertiser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C4158B2921D021AB002359DF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C4158B2421CFFB7F002359DF /* HomeController.swift */,
+				C4635DA121D2C9D100A6682C /* RegistrationController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C4158B2A21D02241002359DF /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C4158B2B21D02252002359DF /* CardViewModel.swift */,
+				C4635DA521D2E38300A6682C /* RegistrationViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +205,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4158B0B21CF7A46002359DF /* ViewController.swift in Sources */,
+				C4158B1F21CF8BC2002359DF /* HomeBottomControlsStackView.swift in Sources */,
+				C4635DA621D2E38300A6682C /* RegistrationViewModel.swift in Sources */,
+				C4635DA421D2CE4A00A6682C /* CustomTextField.swift in Sources */,
 				C4158B0921CF7A46002359DF /* AppDelegate.swift in Sources */,
+				C4158B2E21D02AF6002359DF /* Advertiser.swift in Sources */,
+				C4158B2521CFFB7F002359DF /* HomeController.swift in Sources */,
+				C4158B1C21CF7D38002359DF /* Extensions+UIView.swift in Sources */,
+				C4158B2C21D02252002359DF /* CardViewModel.swift in Sources */,
+				C4158B2321CF9E1F002359DF /* CardView.swift in Sources */,
+				C4158B2121CF90ED002359DF /* TopNavigationStackView.swift in Sources */,
+				C4635DA221D2C9D100A6682C /* RegistrationController.swift in Sources */,
+				C4158B2821CFFC72002359DF /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

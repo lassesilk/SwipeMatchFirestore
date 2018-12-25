@@ -14,19 +14,41 @@ class HomeController: UIViewController {
     let buttonsStackView = HomeBottomControlsStackView()
     let cardsDeckView = UIView()
     
+    let cardViewModels: [CardViewModel] = {
+        let producers = [
+                User(name: "Glenn", age: 2, profession: "Katt", imageNames: ["UNADJUSTEDNONRAW_thumb_10a8", "UNADJUSTEDNONRAW_thumb_10b1", "UNADJUSTEDNONRAW_thumb_10f4"]),
+                User(name: "Hartz", age: 28, profession: "Kjøpmann", imageNames: ["UNADJUSTEDNONRAW_thumb_ff5", "UNADJUSTEDNONRAW_thumb_1fc"]),
+                Advertiser(title: "Bord Til Salgs", brandName: "Wye", posterPhotoName: "UNADJUSTEDNONRAW_thumb_119c")
+                ] as [ProducesCardViewModel]
+        let viewModels = producers.map({return $0.toCardViewModel() })
+        return viewModels
+    }()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         
         setupLayout()
         setupDummyCards()
         
     }
     
+    @objc func handleSettings() {
+        let registrationController = RegistrationController()
+        present(registrationController, animated: true)
+    }
+    
     fileprivate func setupDummyCards() {
-        print("setting up dummy cards")
-        let cardView = CardView(frame: .zero)
-        cardsDeckView.addSubview(cardView)
-        cardView.fillSuperview()
+        cardViewModels.forEach { (cardVM) in
+            let cardView = CardView(frame: .zero)
+            
+            cardView.cardViewModel = cardVM
+            
+            cardsDeckView.addSubview(cardView)
+            cardView.fillSuperview()
+        }
     }
     
     // MARK:- Fileprivate
@@ -41,7 +63,8 @@ class HomeController: UIViewController {
         
         overallStackView.bringSubviewToFront(cardsDeckView)
     }
-
-
+    
+    
 }
+
 
