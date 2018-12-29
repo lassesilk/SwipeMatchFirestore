@@ -10,7 +10,9 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeController: UIViewController, SettingsControllerDelegate {
+class HomeController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate {
+    
+    
    
     let topStackView = TopNavigationStackView()
     let bottomControls = HomeBottomControlsStackView()
@@ -28,22 +30,40 @@ class HomeController: UIViewController, SettingsControllerDelegate {
         
         setupLayout()
         fetchCurrentUser()
-//        setupFirestoreUserCards()
-//        fetchUsersFromFirestore()
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // you want to kick the user out when they log out
+        if Auth.auth().currentUser == nil {
+            let loginController = LoginController()
+            loginController.delegate = self
+            let navController = UINavigationController(rootViewController: loginController)
+            present(navController, animated: true)
+        }
         
     }
     
+    func didFinishLoggingIn() {
+        fetchCurrentUser()
+    }
+    
+    fileprivate let hud = JGProgressHUD(style: .dark)
     fileprivate var user: User?
     
     fileprivate func fetchCurrentUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
+        hud.textLabel.text = "Loading"
+        hud.show(in: view)
+        cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
+        Firestore.firestore().fetchCurrentUser { (user, err) in
             if let err = err {
-                print(err)
+                print("Failed to fetch user:", err)
+                self.hud.dismiss()
                 return
             }
-            guard let dictionary = snapshot?.data() else { return }
-            self.user = User(dictionary: dictionary)
+            self.user = user
+//            self.hud.dismiss()
             self.fetchUsersFromFirestore()
         }
     }
@@ -57,14 +77,11 @@ class HomeController: UIViewController, SettingsControllerDelegate {
     fileprivate func fetchUsersFromFirestore() {
         guard let minAge = user?.minimumSeekingAge, let maxAge = user?.maxSeekingAge else { return }
         
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Fetching Users"
-        hud.show(in: view)
         //Introducing pagination here to page through 2 users at a time
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThan: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
         
         query.getDocuments { (snapshot, err) in
-            hud.dismiss()
+            self.hud.dismiss()
             if let err = err {
                 print("Failed to fetch users:", err)
                 return
@@ -73,19 +90,31 @@ class HomeController: UIViewController, SettingsControllerDelegate {
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
-                self.cardViewModels.append(user.toCardViewModel())
-                self.lastFetchedUser = user
+                if user.uid != Auth.auth().currentUser?.uid {
                 self.setupCardFromUser(user: user)
+                }
+//                self.cardViewModels.append(user.toCardViewModel())
+//                self.lastFetchedUser = user
+                
             })
         }
     }
     
     fileprivate func setupCardFromUser(user: User) {
         let cardView = CardView(frame: .zero)
+        cardView.delegate = self
         cardView.cardViewModel = user.toCardViewModel()
         cardsDeckView.addSubview(cardView)
         cardsDeckView.sendSubviewToBack(cardView)
         cardView.fillSuperview()
+    }
+    
+    func didTapMoreInfo(cardViewModel: CardViewModel) {
+        
+        let userDetailsController = UserDetailsController()
+        userDetailsController.cardViewModel = cardViewModel
+        present(userDetailsController, animated: true)
+
     }
     
     @objc func handleSettings() {

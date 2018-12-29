@@ -109,18 +109,14 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
     var user: User?
     
     fileprivate func fetchCurrentUser() {
-        //Fetch Firestore data
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
+        Firestore.firestore().fetchCurrentUser { (user, err) in
             if let err = err {
-                print(err)
+                print("Failed to fetch user:", err)
                 return
             }
-            guard let dictionary = snapshot?.data() else { return }
-            self.user = User(dictionary: dictionary)
+            self.user = user
             self.loadUserPhotos()
             self.tableView.reloadData()
-            
         }
     }
     
@@ -276,9 +272,14 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleCancel)),
+            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout)),
             UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
         ]
+    }
+    
+    @objc fileprivate func handleLogout() {
+        try? Auth.auth().signOut()
+        dismiss(animated: true)
     }
     
     //Upload to storage should maybe be implemented here in the future. now its in the imagepicker, but it might never be used or changed.
@@ -289,7 +290,7 @@ class SettingsController: UITableViewController, UIImagePickerControllerDelegate
             "fullname" : user?.name ?? "",
             "imageUrl1" : user?.imageUrl1 ?? "",
             "imageUrl2" : user?.imageUrl2 ?? "",
-            "imageUrl3" : user?.imageUrl3 ?? "",
+            "imageUrl3" : user?.imageUrl3 ?? "", //If user saves an url without a image, the app thinks the user has 3 images upon loading that user in homecontroller, when in fact it is a empty string
             "age" : user?.age ?? -1,
             "profession": user?.profession ?? "",
             "minSeekingAge" : user?.minimumSeekingAge ?? -1,
