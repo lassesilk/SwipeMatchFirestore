@@ -75,7 +75,13 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
     var lastFetchedUser: User?
     
     fileprivate func fetchUsersFromFirestore() {
-        guard let minAge = user?.minimumSeekingAge, let maxAge = user?.maxSeekingAge else { return }
+//        guard let minAge = user?.minimumSeekingAge, let maxAge = user?.maxSeekingAge else {
+//            self.hud.dismiss()
+//            return
+//        }
+        
+        let minAge = user?.minimumSeekingAge ?? SettingsController.defaultMinSeekingAge
+        let maxAge = user?.maxSeekingAge ?? SettingsController.defaultMaxSeekingage
         
         //Introducing pagination here to page through 2 users at a time
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThan: minAge).whereField("age", isLessThanOrEqualTo: maxAge)

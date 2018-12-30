@@ -19,7 +19,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
         let image = info[.originalImage] as? UIImage
 //        registrationViewModel.image = image
         registrationViewModel.bindableImage.value = image
-        
+        registrationViewModel.checkFormValidity()
         dismiss(animated: true, completion: nil)
     }
 }
@@ -227,6 +227,7 @@ class RegistrationController: UIViewController {
     
     @objc fileprivate func handleGoToLogin() {
         let loginController = LoginController()
+        
         navigationController?.pushViewController(loginController, animated: true)
     }
     

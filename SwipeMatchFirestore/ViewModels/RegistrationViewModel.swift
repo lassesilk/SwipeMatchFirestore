@@ -31,6 +31,12 @@ class RegistrationViewModel {
         }
     }
     
+     func checkFormValidity() {
+        let isFormValid = fullname?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false && bindableImage.value != nil
+        
+        bindableIsFormValid.value = isFormValid
+    }
+    
     func performRegistration(completion: @escaping (Error?) ->()) {
         
         guard let email = email, let password = password else { return }
@@ -83,7 +89,14 @@ class RegistrationViewModel {
     fileprivate func saveInfoToFirestore(imageUrl: String, completion: @escaping (Error?) ->()) {
         
         let uid = Auth.auth().currentUser?.uid ?? "" //guard maybe? should not store under empty string in firestore
-        let docData = ["fullname": fullname ?? "", "uid": uid, "imageUrl1": imageUrl]
+        let docData: [String: Any] = [
+            "fullname": fullname ?? "",
+            "uid": uid,
+            "imageUrl1": imageUrl,
+            "Age": 18,
+            "minSeekingAge" : SettingsController.defaultMinSeekingAge,
+            "maxSeekingAge" : SettingsController.defaultMaxSeekingage
+            ]
         
         Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
             if let err = err {
@@ -95,9 +108,5 @@ class RegistrationViewModel {
         }
     }
     
-    fileprivate func checkFormValidity() {
-        let isFormValid = fullname?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false
-        
-        bindableIsFormValid.value = isFormValid
-    }
+ 
 }
