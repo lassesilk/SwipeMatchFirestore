@@ -31,6 +31,7 @@
 		C4644DD521D6F050004A0308 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4644DD321D6F050004A0308 /* LoginController.swift */; };
 		C4777AF821D795F400542749 /* UserDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4777AF721D795F400542749 /* UserDetailsController.swift */; };
 		C4777AFA21D8AC9D00542749 /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4777AF921D8AC9D00542749 /* SwipingPhotosController.swift */; };
+		C49994B921E5268700929665 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49994B821E5268700929665 /* MatchView.swift */; };
 		C4E5F73421D39658005643EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4E5F73321D39658005643EC /* GoogleService-Info.plist */; };
 		DF63722A5FE0DACC3B88ACFB /* Pods_SwipeMatchFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A463C82EEABC02A203CC37EB /* Pods_SwipeMatchFirestore.framework */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		C4644DD321D6F050004A0308 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		C4777AF721D795F400542749 /* UserDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsController.swift; sourceTree = "<group>"; };
 		C4777AF921D8AC9D00542749 /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
+		C49994B821E5268700929665 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		C4E5F73321D39658005643EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,6 +136,7 @@
 				C4635DA321D2CE4A00A6682C /* CustomTextField.swift */,
 				C4644DCB21D67B40004A0308 /* SettingsCell.swift */,
 				C4644DCD21D6DFF9004A0308 /* AgeRangeCell.swift */,
+				C49994B821E5268700929665 /* MatchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				C4777AF821D795F400542749 /* UserDetailsController.swift in Sources */,
 				C4158B2521CFFB7F002359DF /* HomeController.swift in Sources */,
 				C4644DCE21D6DFF9004A0308 /* AgeRangeCell.swift in Sources */,
+				C49994B921E5268700929665 /* MatchView.swift in Sources */,
 				C4644DD421D6F050004A0308 /* LoginViewModel.swift in Sources */,
 				C4158B1C21CF7D38002359DF /* Extensions+UIView.swift in Sources */,
 				C4644DD021D6EBF0004A0308 /* Firebase+Utils.swift in Sources */,
