@@ -26,6 +26,8 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
 
 class RegistrationController: UIViewController {
     
+    var delegate: LoginControllerDelegate?
+    
     //UI Components
     let selectPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -107,6 +109,10 @@ class RegistrationController: UIViewController {
                 return
             }
             print("finished registering our user")
+            
+            self?.dismiss(animated: true, completion: {
+                self?.delegate?.didFinishLoggingIn()
+            })
         }
     }
     
