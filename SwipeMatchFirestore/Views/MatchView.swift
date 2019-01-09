@@ -7,9 +7,44 @@
 //
 
 import UIKit
+import Firebase
 
 //Using view whenever i do not need access to the viewcontroller lifecycle funcs since it is more lightweight
 class MatchView: UIView {
+    
+    var currentUser: User! {
+        didSet {
+            
+        }
+    }
+    
+    //implicitly unwrapped optional means you are almost guaranteed to have this variable set up
+    var cardUID: String! {
+        didSet {
+           //Either fetch current user inside here or pass in our current user if we have it
+            
+            
+            //Feth CardUID information
+            let query = Firestore.firestore().collection("users")
+            query.document(cardUID).getDocument { (snapshot, err) in
+                if let err = err {
+                    print("Failed to fetch cardUser", err)
+                    return
+                }
+                guard let dictionary = snapshot?.data() else { return }
+                let user = User(dictionary: dictionary)
+                guard let url = URL(string: user.imageUrl1 ?? "") else { return }
+                self.cardUserImageView.sd_setImage(with: url)
+                
+                guard let currentUserUrl = URL(string: self.currentUser.imageUrl1 ?? "") else { return }
+                
+                self.currentUserImageView.sd_setImage(with: currentUserUrl, completed: { (_, _, _, _) in
+                    self.setupAnimations()
+                })
+            }
+            
+        }
+    }
     
     fileprivate let itsAMatchImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "itsamatch"))
@@ -42,6 +77,7 @@ class MatchView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 2
         imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.alpha = 0
         return imageView
     }()
     
@@ -64,15 +100,68 @@ class MatchView: UIView {
         
         setupBlurView()
         setupLayout()
+//        setupAnimations()
     }
     
+    fileprivate func setupAnimations() {
+        
+        views.forEach({$0.alpha = 1})
+        
+        //Starting positions
+        let angle = 30 * CGFloat.pi / 180
+        currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: 200, y: 0))
+        cardUserImageView.transform = CGAffineTransform(rotationAngle: angle).concatenating(CGAffineTransform(translationX: -200, y: 0))
+        
+        sendMessageButton.transform = CGAffineTransform(translationX: -500, y: 0)
+        keepSwipingButton.transform = CGAffineTransform(translationX: 500, y: 0)
+        
+        //Keyframe animations for segmented animation
+        
+        UIView.animateKeyframes(withDuration: 1.3, delay: 0, options: .calculationModeCubic, animations: {
+            //animation 1 - translation back to original position:
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.45, animations: {
+                self.currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle)
+                self.cardUserImageView.transform = CGAffineTransform(rotationAngle: angle)
+            })
+            //animation 2 - rotation:
+            UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.4, animations: {
+                self.currentUserImageView.transform = .identity
+                self.cardUserImageView.transform = .identity
+            })
+
+        }) { (_) in
+            
+        }
+        
+        UIView.animate(withDuration: 0.75, delay: 0.65 * 1.3, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+            self.sendMessageButton.transform = .identity
+            self.keepSwipingButton.transform = .identity
+        }) { (_) in
+            
+        }
+    }
+    
+    lazy var views = [
+        itsAMatchImageView,
+        descriptionLabel,
+        currentUserImageView,
+        cardUserImageView,
+        sendMessageButton,
+        keepSwipingButton
+    ]
+    
     fileprivate func setupLayout() {
-        addSubview(itsAMatchImageView)
-        addSubview(descriptionLabel)
-        addSubview(currentUserImageView)
-        addSubview(cardUserImageView)
-        addSubview(sendMessageButton)
-        addSubview(keepSwipingButton)
+//        addSubview(itsAMatchImageView)
+//        addSubview(descriptionLabel)
+//        addSubview(currentUserImageView)
+//        addSubview(cardUserImageView)
+//        addSubview(sendMessageButton)
+//        addSubview(keepSwipingButton)
+        
+        views.forEach { (v) in
+            addSubview(v)
+            v.alpha = 0
+        }
         
         let imageWidth: CGFloat = 140
         
